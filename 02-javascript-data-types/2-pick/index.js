@@ -6,7 +6,7 @@
  */
 export const pick = (obj, ...fields) => {
   /* First version
-  let clone = {};
+  const clone = {};
   for (let field of fields) {
     if (field in obj) {
       clone[field] = obj[field];
@@ -15,17 +15,16 @@ export const pick = (obj, ...fields) => {
   return clone;
    */
 
-  /* Second version
-    let clone = {}
-    for (const [key, value] of Object.entries(obj)) {
-      if (fields.indexOf(key) !== -1) {
-        clone[key] = value
-      }
+  // Second version
+  const clone = {}
+  for (const [key, value] of Object.entries(obj)) {
+    if (fields.includes(key)) {
+      clone[key] = value;
     }
-    return clone;
-   */
+  }
+  return clone;
 
-  // Third version
+  /* Third version
   return Object.fromEntries(
     Object.entries(obj)
       .filter(([key]) => {
@@ -34,4 +33,5 @@ export const pick = (obj, ...fields) => {
         }
       })
   );
+   */
 };
